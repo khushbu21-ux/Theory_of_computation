@@ -1,0 +1,55 @@
+lex file
+
+
+%{
+    #include<stdlib.h>
+    void yyerror(char *);
+%}
+
+%%
+
+[\t]+	;
+int |
+float |
+double |
+long |
+void |
+char |
+String |
+char 		              {printf("%s => is a datatype",yytext);}
+public |
+private |
+protected 	          {printf("%s => is a Access specifier",yytext);}
+do |
+while |
+for 		              {printf("%s => is a loop",yytext);}
+"&&" |
+"||" |
+"!" |
+"!=" 		              {printf("%s => is a Logical operator",yytext);}
+"<" |
+">" |
+"<=" |
+">=" |
+"=="                  {printf("%s => is a relational operator",yytext);}
+"+" |
+"-" |
+"/" | 
+"%" |
+"*" 		              {printf("%s => is a Arithemtic operator",yytext);}
+[a-zA-Z]+	            {printf("%s => is inavlid token",yytext);}
+.|\n 		              {ECHO; }
+
+%%
+
+int yywrap(void)
+{
+	  return 1;
+}
+
+int main()
+{
+	  yylex();
+	  yywrap();
+	  return 0;
+}	
